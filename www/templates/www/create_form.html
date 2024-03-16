@@ -1,0 +1,24 @@
+{% extends 'www/base.html' %}
+
+{% block content %}
+
+    <h1>Create Smartphone</h1>
+    <form action="{% url 'create' %}" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.name == 'ram' and form.errors.ram %}
+                    <span style="color: red;">{{ form.errors.ram }}</span>
+                {% endif %}
+                {% if field.name == 'brand' and form.errors.brand %}
+                    <span style="color: red;">{{ form.errors.brand }}</span>
+                {% endif %}
+                {% if field.name == 'model' and forms.errors.model %}
+                    <span style="color: red;">{{ form.errors.model }}</span>
+                {% endif %}
+        {% endfor %}
+        <button type="submit">Create</button>
+    </form>
+
+{% endblock %}
